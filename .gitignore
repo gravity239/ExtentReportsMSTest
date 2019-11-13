@@ -1,0 +1,20 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/KiewitTeamBinder/v14
+/KiewitTeamBinder.Api/bin/Debug
+/KiewitTeamBinder.Api/obj/Debug
+/KiewitTeamBinder.Api.Tests/bin/Debug
+/KiewitTeamBinder.Api.Tests/obj/Debug
+/KiewitTeamBinder.Common/bin/Debug
+/KiewitTeamBinder.Common/obj/Debug
+/KiewitTeamBinder.UI/bin/Debug
+/KiewitTeamBinder.UI/obj/Debug
+/KiewitTeamBinder.UI.Tests/bin/Debug
+/KiewitTeamBinder.UI.Tests/obj/Debug
+/packages
+/.vs
+/KiewitTeamBinder.Api/obj/Release
+/KiewitTeamBinder.Common/obj/Release
+/KiewitTeamBinder.UI.Tests/DownloadFiles
