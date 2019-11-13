@@ -32,7 +32,6 @@ namespace Sample.UI.Tests
         [ThreadStatic]
         public static ExtentTest test;
 
-        public Exception lastException;
         public ExtentReports extent;
         public TestContext TestContext { get; set; }
 
