@@ -128,7 +128,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="TestData\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
