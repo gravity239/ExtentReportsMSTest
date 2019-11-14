@@ -8,6 +8,7 @@ namespace Sample.Common.Helper
 {
     public static class Constant
     {
-        public const string HomePage = "http://192.168.171.105/TADashboard/login.jsp";
+        //public const string HomePage = "http://192.168.171.105/TADashboard/login.jsp";
+        public const string HomePage = "https://www.google.com";
     }
 }

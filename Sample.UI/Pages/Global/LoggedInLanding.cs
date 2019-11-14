@@ -39,14 +39,6 @@ namespace Sample.UI.Pages.Global
         {
         }
 
-        public NonSsoSignOn Logout()
-        {
-            LogoutLink.Click();
-            WebDriver.SwitchTo().ActiveElement();
-            LogoutYesButton.Click();
-            return new NonSsoSignOn(WebDriver);
-        }               
-
         public T DownloadFile<T>(string fileName)
         {
             DownloadFileByIE(fileName);

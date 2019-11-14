@@ -150,7 +150,7 @@
     <Compile Include="TestBase.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="User\SignOnTests.cs">
+    <Compile Include="User\GoogleTests.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

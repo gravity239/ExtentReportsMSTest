@@ -132,13 +132,9 @@
   <ItemGroup>
     <Compile Include="Browser.cs" />
     <Compile Include="IWebElementExtensions.cs" />
+    <Compile Include="Pages\GoogleHome.cs" />
     <Compile Include="Pages\Global\LoggedInLanding.cs" />
-    <Compile Include="Pages\Global\NonSsoSignOn.cs" />
-    <Compile Include="Pages\Global\SsoSignOn.cs" />
-    <Compile Include="Pages\Global\NotLoggedInLanding.cs" />
     <Compile Include="Pages\Global\PageBase.cs" />
-    <Compile Include="Pages\Login.cs" />
-    <Compile Include="Pages\Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
