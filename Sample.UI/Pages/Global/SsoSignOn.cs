@@ -40,45 +40,6 @@ namespace Sample.UI.Pages.Global
         {
             Title = "TeamBinder";
         }
-
-        //public LoggedInLanding KiewitUserLogon(TestAccount account)
-        //{
-        //    string signinWindow;
-
-        //    //Click KiewitUserLogin Button and Switch to OtherUserLogin Window
-        //    if (KiewitUserLoginBtn == null)
-        //        Browser.MaximizeWindow();
-        //    SwitchToNewPopUpWindow(KiewitUserLoginBtn, out signinWindow, true);
-
-        //    //Fill Kiewit account fields
-        //    WaitForElementEnable(_email);
-        //    Email.InputText(account.kiewitUserName);
-        //    NextButton.Click();
-        //    WaitUntil(driver => Username != null);
-        //    Username.InputText(account.kiewitUserName);
-        //    Password.InputText(account.kiewitPassword);
-
-        //    SignInButton.Click();
-        //    if (FindElement(By.Id("idBtn_Back"), shortTimeout) != null)
-        //        DenyStaySignedIn.Click();
-
-        //    //Fill TeamBinder account fields
-        //    if (FindElement(By.Id("txtUserId"), mediumTimeout) != null)
-        //    {
-        //        UserIdTextbox.InputText(account.Username, true);
-        //        CompanyIdTextbox.InputText(account.Company, true);
-        //        PasswordTextbox.InputText(account.Password, true);
-        //        //Click LogIn button
-        //        RegisterButton.Click();
-        //    }
-            
-        //    var projectsListPage = new ProjectsList(WebDriver);
-        //    WaitUntil(driver => projectsListPage.ProjListTitle != null);
-
-        //    return projectsListPage;
-
-        //}
-
     }
     #endregion
 }

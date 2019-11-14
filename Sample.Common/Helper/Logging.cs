@@ -29,5 +29,11 @@ namespace Sample.Common.Helper
         {
             EndStepNode(GetLastNode(), args.Method.Name);
         }
+
+        public override void OnException(MethodExecutionArgs args)
+        {
+            GetLastNode().Error(args.Exception.Message + " " + args.Exception.StackTrace);
+            EndStepNode(GetLastNode(), args.Method.Name);
+        }
     }
 }
