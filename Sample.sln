@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.UI", "Sample.UI\Samp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.UI.Tests", "Sample.UI.Tests\Sample.UI.Tests.csproj", "{3DFC64D3-4C3D-4BF7-A976-03852EE33267}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumCore", "SeleniumCore\SeleniumCore.csproj", "{701273DC-4C88-46E8-BC52-0F93FBE35FF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,14 @@ Global
 		{3DFC64D3-4C3D-4BF7-A976-03852EE33267}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3DFC64D3-4C3D-4BF7-A976-03852EE33267}.Release|x86.ActiveCfg = Release|x86
 		{3DFC64D3-4C3D-4BF7-A976-03852EE33267}.Release|x86.Build.0 = Release|x86
+		{701273DC-4C88-46E8-BC52-0F93FBE35FF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{701273DC-4C88-46E8-BC52-0F93FBE35FF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{701273DC-4C88-46E8-BC52-0F93FBE35FF7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{701273DC-4C88-46E8-BC52-0F93FBE35FF7}.Debug|x86.Build.0 = Debug|Any CPU
+		{701273DC-4C88-46E8-BC52-0F93FBE35FF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{701273DC-4C88-46E8-BC52-0F93FBE35FF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{701273DC-4C88-46E8-BC52-0F93FBE35FF7}.Release|x86.ActiveCfg = Release|Any CPU
+		{701273DC-4C88-46E8-BC52-0F93FBE35FF7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
