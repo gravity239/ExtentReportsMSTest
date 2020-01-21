@@ -12,7 +12,7 @@ namespace SeleniumCore.Drivers
 {
     public class Firefox : DriverManager
     {
-        public override void CreateDriver(string key)
+        public override void CreateDriver(string key, string locationDownload = null)
         {
             var props = GetDriverProperties(key);
             FirefoxOptions options = new FirefoxOptions();

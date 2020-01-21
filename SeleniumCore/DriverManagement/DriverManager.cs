@@ -13,6 +13,8 @@ namespace SeleniumCore.DriverManagement
         private readonly Dictionary<string, IWebDriver> _webDrivers = new Dictionary<string, IWebDriver>();
         private readonly Dictionary<string, DriverProperties> _driverProperties =
            new Dictionary<string, DriverProperties>();
+        private readonly Dictionary<string, int> _elementTimeOut = new Dictionary<string, int>();
+        private readonly int _defaultElementTimeOut = 5;
 
         /// <summary>
         ///     Set driver properties
@@ -38,7 +40,7 @@ namespace SeleniumCore.DriverManagement
         ///     Create WebDriver
         /// </summary>
         /// <param name="key"></param>
-        public abstract void CreateDriver(string key);
+        public abstract void CreateDriver(string key, string downloadLocation = null);
 
 
         /// <summary>
@@ -48,6 +50,7 @@ namespace SeleniumCore.DriverManagement
         /// <param name="driver"></param>
         public void SetWebDriver(string key, IWebDriver driver)
         {
+            SetElementTimeOut(key, _defaultElementTimeOut);
             _webDrivers.Add(key, driver);
         }
 
@@ -70,6 +73,26 @@ namespace SeleniumCore.DriverManagement
             //Remote all
             _webDrivers.Clear();
             _driverProperties.Clear();
+        }
+
+        /// <summary>
+        ///     Get time out for finding web element
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public long GetElementTimeOut(string key)
+        {
+            return _elementTimeOut[key];
+        }
+
+        /// <summary>
+        ///     Set time out for finding web element
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="seconds"></param>
+        public void SetElementTimeOut(string key, int seconds)
+        {
+            _elementTimeOut.Add(key, seconds);
         }
     }
 }

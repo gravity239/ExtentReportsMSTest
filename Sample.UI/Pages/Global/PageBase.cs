@@ -19,20 +19,9 @@ namespace Sample.UI.Pages.Global
     {
         #region Entities
 
-
-        public string Title { get; set; }
-
-        [ThreadStatic]
-        internal static string Url;
-
         [ThreadStatic]
         internal static IWebDriver WebDriver;
 
-        public static By _walkMe => By.XPath("//div[@id='walkme-player']//div[contains(@class,'walkme-in')]");
-        internal static By _loadingPanel => By.XPath("//div[contains(@id, 'LoadingPanel')]");
-        internal static By _progressPopUp => By.Id("divProgressWindow");
-        internal static By _progressMessage => By.Id("spanProgressMsg");
-        internal static By overlayWindow = By.XPath("//div[@class = 'k-overlay']");
         internal const int longTimeout = 30;
         internal const int mediumTimeout = 15;
         internal const int shortTimeout = 5;
@@ -44,31 +33,9 @@ namespace Sample.UI.Pages.Global
         protected PageBase(IWebDriver webDriver)
         {
             WebDriver = webDriver;
-            PageFactory.InitElements(webDriver, this);
-            Url = "";
-            Title = "";
         }
-        protected PageBase(string url, string title)
+        protected PageBase()
         {
-            Url = url;
-            Title = title;
-        }
-
-        internal void WaitForLoad()
-        {
-            var wait = Browser.Wait();
-
-            try
-            {
-                wait.Until(p => p.Title == Title);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                //TakeScreenshot();
-                throw;
-            }
-
         }
 
         /// <summary>
@@ -88,30 +55,6 @@ namespace Sample.UI.Pages.Global
                     Box.Click();
             
             StableFindElement(textbox).InputText(value);
-        }
-
-        public void WaitForLoadingPanel(int timeout = sapShortTimeout)
-        {
-            var node = CreateStepNode();
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            do
-            {
-                try
-                {
-                    WaitForLoading(_loadingPanel);
-                    WaitForElementDisplay(_walkMe, mediumTimeout);
-                    if (WaitForElementInvisible(_loadingPanel))
-                        break;
-                }
-                catch (Exception)
-                { }
-            } while (stopwatch.Elapsed.TotalSeconds <= timeout);
-            if (stopwatch.Elapsed.TotalSeconds >= timeout)
-                node.Warning("The icon loading process is not completed in timeout: " + timeout);
-
-            stopwatch.Stop();
-            EndStepNode(node);
         }
 
         internal static IWebElement StableFindElement(By by, long timeout = longTimeout)
@@ -180,8 +123,6 @@ namespace Sample.UI.Pages.Global
         internal static void Wait(int seconds = longTimeout)
         {
             System.Threading.Thread.Sleep(seconds * 1000);
-            //WebDriverWait wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(seconds));
-            //wait.
         }
 
         internal static T WaitUntil<T>(Func<IWebDriver, T> condition, int seconds = longTimeout)
@@ -893,6 +834,28 @@ namespace Sample.UI.Pages.Global
             //Console.WriteLine(callingClassName + "." + callingMethodName + " generated an error. A ScreenShot of the browser has been saved. " + filePath);
 
         }
+        public void LogValidation(ref List<KeyValuePair<string, bool>> validations, List<KeyValuePair<string, bool>> addedValidations)
+        {
+            validations.AddRange(addedValidations);
+        }
+
+        public T LogValidation<T>(ref List<KeyValuePair<string, bool>> validations, List<KeyValuePair<string, bool>> addedValidations)
+        {
+            LogValidation(ref validations, addedValidations);
+            return (T)Activator.CreateInstance(typeof(T), WebDriver);
+        }
+
+        public void LogValidation(ref List<KeyValuePair<string, bool>> validations, KeyValuePair<string, bool> addedValidation)
+        {
+            validations.Add(addedValidation);
+        }
+
+        public T LogValidation<T>(ref List<KeyValuePair<string, bool>> validations, KeyValuePair<string, bool> addedValidation)
+        {
+            validations.Add(addedValidation);
+            return (T)Activator.CreateInstance(typeof(T), WebDriver);
+        }
     }
+
     #endregion
 }

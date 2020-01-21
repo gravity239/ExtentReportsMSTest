@@ -62,7 +62,10 @@
     <Compile Include="Drivers\Chrome.cs" />
     <Compile Include="DriverManagement\DriverManager.cs" />
     <Compile Include="Drivers\Firefox.cs" />
+    <Compile Include="Drivers\IE.cs" />
     <Compile Include="ElementWrapper\Element.cs" />
+    <Compile Include="ElementWrapper\Table.cs" />
+    <Compile Include="Helpers\Locator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\FileUtils.cs" />
     <Compile Include="Utilities\JsonParser.cs" />

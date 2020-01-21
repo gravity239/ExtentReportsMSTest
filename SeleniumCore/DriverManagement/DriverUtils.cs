@@ -20,12 +20,10 @@ namespace SeleniumCore.DriverManagement
 
         private static readonly ThreadLocal<string> _DRIVER_KEY = new ThreadLocal<string>();
 
-       
-
         /// <summary>
         ///     create webdriver by properties,  driver key = "default" if not set
         /// </summary>
-        public static void CreateDriver(DriverProperties pros, string key = "default")
+        public static void CreateDriver(DriverProperties pros, string downloadLocation = null, string key = "default")
         {
             DriverManager driverManager = null;
             switch (pros.GetDriverType())
@@ -36,9 +34,9 @@ namespace SeleniumCore.DriverManagement
                 case DriverType.Firefox:
                     driverManager = new Firefox();
                     break;
-                //case DriverType.IE:
-                //    driverManager = new IEBrowser();
-                //    break;
+                case DriverType.IE:
+                    driverManager = new IE();
+                    break;
                 //case DriverType.IOSApp:
                 //    driverManager = new IOSAppDriver();
                 //    break;
@@ -62,7 +60,7 @@ namespace SeleniumCore.DriverManagement
             if (driverManager != null)
             {
                 driverManager.SetDriverProperties(key, pros);
-                driverManager.CreateDriver(key);
+                driverManager.CreateDriver(key, downloadLocation);
                 if (_DRIVER.Value == null)
                 {
                     _DRIVER.Value = driverManager;
@@ -218,6 +216,15 @@ namespace SeleniumCore.DriverManagement
             var ssdriver = GetDriver() as ITakesScreenshot;
             var screenshot = ssdriver.GetScreenshot();
             screenshot.SaveAsFile(filepath, ScreenshotImageFormat.Png);
+        }
+
+        /// <summary>
+        ///     Get time out for finding web element
+        /// </summary>
+        /// <returns></returns>
+        public static long GetElementTimeOut()
+        {
+            return _DRIVER.Value.GetElementTimeOut(GetKeyName());
         }
     }
 }

@@ -37,10 +37,10 @@
   </DataCollectionRunSettings>-->
   <!-- Parameters used by tests at runtime -->
   <TestRunParameters>
-    <!-- <Parameter name="browser" value="chrome" /> -->
-    <Parameter name="browser" value="chrome" />
-    <Parameter name="headless" value="false" />
-    <Parameter name="environment" value="test" />
+    <Parameter name="Driver" value="local-ie" />
+    <!--can be local-chrome,local-ie,local-firefox,android-chrome,ios-web,etc-->
+    <Parameter name="Env" value="Desk" />
+    <Parameter name="ConfigPath" value="/Resources/DriverConfig.json" />
   </TestRunParameters>
   <!-- Adapter Specific sections -->
   <!-- MSTest adapter -->

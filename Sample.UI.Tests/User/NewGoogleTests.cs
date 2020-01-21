@@ -10,21 +10,21 @@ using Sample.UI.Pages.Google;
 namespace Sample.UI.Tests.User
 {
     [TestClass]
-    public class GoogleTests : TestBase
+    public class NewGoogleTests : Test
     {
+        Home google = PageFactory.Get<Home>();
 
-        [CustomTestMethod]
-        public void TC001()
+        [SampleTestMethod]
+        public void TC003()
         {
             //Given
             //1. Navigate to Google Home Page.
             test.Info("Navigate to Google page.");
-            var driver = Browser.Open(Constant.HomePage, "chrome");
-            
+            NavigateToUrl("http://google.com");
+
             //When
             //2. Enter search text.
-            test = LogTest("TC001 - Verify that search value is correct.");
-            GoogleHome google = new GoogleHome(driver);
+            test = LogTest("TC003 - Verify that search value is correct.");
             google.Search("abc");
 
             //Then
@@ -34,18 +34,18 @@ namespace Sample.UI.Tests.User
             validations.Should().OnlyContain(validations => validations.Value).Equals(bool.TrueString);
         }
 
-        [CustomTestMethod]
-        public void TC002()
+
+        [SampleTestMethod]
+        public void TC004()
         {
             //Given
             //1. Navigate to Google Home Page.
             test.Info("Navigate to Google page.");
-            var driver = Browser.Open(Constant.HomePage, "chrome");
+            NavigateToUrl("http://google.com");
 
             //When
             //2. Enter search text.
-            test = LogTest("TC002 - Verify that search value is correct.");
-            GoogleHome google = new GoogleHome(driver);
+            test = LogTest("TC004 - Verify that search value is correct.");
             google.Search("abc");
 
             //Then

@@ -7,26 +7,27 @@ using OpenQA.Selenium;
 using static Sample.Common.Helper.ExtentReportsHelper;
 using Sample.Common.Helper;
 using Sample.UI.Pages.Global;
+using SeleniumCore.ElementWrapper;
+using SeleniumCore.Helpers;
+using Newtonsoft.Json.Linq;
 
-namespace Sample.UI.Pages
+namespace Sample.UI.Pages.Google
 {
-    public class GoogleHome: PageBase
+    public class Home : Page
     {
-        private static By _searchTextbox => By.Name("q");
-        private static By _searchForm => By.Id("searchform");
-
-        public IWebElement SearchTextbox { get { return StableFindElement(_searchTextbox); } }
-        public IWebElement SearchForm { get { return StableFindElement(_searchForm); } }
-
-        public GoogleHome(IWebDriver webDriver) : base(webDriver)
+        public Home()
         {
+            selector = Locator.Instance.Load(locatorPath);
         }
+        public Element SearchTextbox => new Element("name=q");
+        public Element SearchForm => new Element(Locator.Instance.Get(selector, "searchForm"));
+
 
         [Logging]
-        public GoogleHome Search(string text)
+        public Home Search(string text)
         {
             GetLastNode().Info("Search for: " + text);
-            SearchTextbox.InputText(text);
+            SearchTextbox.SendKeys(text);
            
             //Child node handle illustration for multiple threads
             var currentLastNode = GetLastNode();

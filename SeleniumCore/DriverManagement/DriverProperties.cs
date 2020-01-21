@@ -25,7 +25,7 @@ namespace SeleniumCore.DriverManagement
         /// <summary>
         ///     Load driver config from json file.
         /// </summary>
-        public DriverProperties(string filePath, string driver)
+        public DriverProperties(string filePath, string driver, string downloadLocation = null)
         {
             SetPropertyKey(driver);
             var json = JsonParser.CreateJsonObjectFromFile(filePath);
@@ -35,9 +35,10 @@ namespace SeleniumCore.DriverManagement
             SetTimeSpan(Convert.ToInt32(tokens.SelectToken("timeSpan")));
             if (tokens.SelectToken("arguments") != null)
                 SetArguments(tokens.SelectToken("arguments").ToObject<List<string>>());
-            if (tokens.SelectToken("capabilities") != null) SetCapabilities(tokens.SelectToken("capabilities"));
+            if (tokens.SelectToken("capabilities") != null)
+                SetCapabilities(tokens.SelectToken("capabilities"));
             if(tokens.SelectToken("userProfilePreference") != null)
-
+                SetUserProfilePreferences(tokens.SelectToken("userProfilePreference"));
             if (IsRemoteMode())
                 SetRemoteUrl(tokens.SelectToken("remoteUrl").ToString());
         }

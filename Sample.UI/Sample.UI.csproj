@@ -131,7 +131,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Browser.cs" />
+    <Compile Include="Pages\Google\Home.cs" />
+    <Compile Include="Pages\Google\HomeMobile.cs" />
+    <Compile Include="Utilities\Config.cs" />
     <Compile Include="IWebElementExtensions.cs" />
+    <Compile Include="Utilities\PageFactory.cs" />
+    <Compile Include="Pages\Global\Page.cs" />
     <Compile Include="Pages\GoogleHome.cs" />
     <Compile Include="Pages\Global\LoggedInLanding.cs" />
     <Compile Include="Pages\Global\PageBase.cs" />
@@ -145,16 +150,24 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Selectors\Selector.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sample.Common\Sample.Common.csproj">
       <Project>{2f0e5a22-47a2-4953-951a-2bee5a205df3}</Project>
       <Name>Sample.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SeleniumCore\SeleniumCore.csproj">
+      <Project>{701273DC-4C88-46E8-BC52-0F93FBE35FF7}</Project>
+      <Name>SeleniumCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

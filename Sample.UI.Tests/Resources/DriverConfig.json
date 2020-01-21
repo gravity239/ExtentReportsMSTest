@@ -1,0 +1,67 @@
+{
+  "local-chrome": {
+    "driverType": "Chrome",
+    "arguments": [ ],
+    "userProfilePreference": {"disable-popup-blocking": "true","intl.accept_languages": "en_US" },
+    "capabilities": { },
+    "runMode": "Local",
+    "timeSpan": 120
+  },
+  "local-firefox": {
+    "driverType": "FireFox",
+    "arguments": [ ],
+    "capabilities": { },
+    "runMode": "Local",
+    "timeSpan": 120
+  },
+  "local-ie": {
+    "driverType": "IE",
+    "arguments": [ ],
+    "capabilities": {"disable-popup-blocking": "true" },
+    "runMode": "Local",
+    "timeSpan": 120
+  },
+  "remote-chrome": {
+    "driverType": "Chrome",
+    "arguments": [ ],
+    "capabilities": {
+      "browser": "Chrome",
+      "browser_version": "73.0",
+      "browserstack.user": "",
+      "browserstack.key": ""
+    },
+    "remoteUrl": "http://hub-cloud.browserstack.com/wd/hub/",
+    "runMode": "Remote",
+    "timeSpan": 120
+  },
+  "android-chrome": {
+    "driverType": "AndroidChrome",
+    "arguments": [ ],
+    "capabilities": {
+      "device": "Samsung Galaxy S9",
+      "realMobile": "true",
+      "browserName": "Chrome",
+      "os_version": "8.0",
+      "browserstack.user": "",
+      "browserstack.key": ""
+    },
+    "remoteUrl": "http://hub-cloud.browserstack.com/wd/hub/",
+    "runMode": "Remote",
+    "timeSpan": 120
+  },
+  "ios-web": {
+    "driverType": "IOSWeb",
+    "arguments": [ ],
+    "capabilities": {
+      "deviceName": "iPhone 6S Plus",
+      "realMobile": "true",
+      "browserName": "iPhone",
+      "os_version": "11",
+      "browserstack.user": "",
+      "browserstack.key": ""
+    },
+    "remoteUrl": "http://hub-cloud.browserstack.com/wd/hub/",
+    "runMode": "Remote",
+    "timeSpan": 120
+  }
+}

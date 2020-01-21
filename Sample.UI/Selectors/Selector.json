@@ -1,0 +1,8 @@
+{
+  "GoogleHome": {
+    "default": {
+      "searchTextBox": "name=q",
+      "searchForm": "id=password"
+    }
+  }
+}

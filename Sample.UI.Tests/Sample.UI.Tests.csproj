@@ -147,9 +147,11 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Test.cs" />
     <Compile Include="TestBase.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="User\NewGoogleTests.cs" />
     <Compile Include="User\GoogleTests.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
@@ -161,6 +163,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Resources\DriverConfig.json" />
+    <None Include="uitest.runsettings">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="test.runsettings">
       <SubType>Designer</SubType>
       <Link>test.runsettings</Link>
@@ -177,6 +183,10 @@
     <ProjectReference Include="..\Sample.UI\Sample.UI.csproj">
       <Project>{3f432ccc-df01-4722-a4f0-3b8496a194f3}</Project>
       <Name>Sample.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SeleniumCore\SeleniumCore.csproj">
+      <Project>{701273DC-4C88-46E8-BC52-0F93FBE35FF7}</Project>
+      <Name>SeleniumCore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

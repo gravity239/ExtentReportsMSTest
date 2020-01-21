@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
-using System.IO;
-using Sample.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
-using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports;
 using System.Linq;
 using Sample.Common.Helper;
 using System.Collections.Generic;
-using System.Threading;
 using System.Net;
 using SeleniumCore.Utilities;
 using Sample.UI.Utilities;
@@ -18,7 +13,7 @@ using SeleniumCore.DriverManagement;
 namespace Sample.UI.Tests
 {
     [TestClass]
-    public abstract class TestBase
+    public abstract class Test
     {
         public TestContext TestContext { get; set; }
         protected string browser = string.Empty;
@@ -59,16 +54,35 @@ namespace Sample.UI.Tests
 
             downloadLocation = TestContext.TestDir;
             captureLocation = TestContext.TestDir;
+            SetUIEnvVariables(TestContext);
 
             validations = new List<KeyValuePair<string, bool>>();
             string report = Utils.GetRandomValue(TestContext.TestName);
             reportPath = captureLocation + report + ".html";
             extent = ExtentReportsHelper.CreateReport(reportPath, TestContext.TestName);
-            extent.AddSystemInfo("Environment", TestContext.Properties["environment"].ToString());
-            extent.AddSystemInfo("Browser", TestContext.Properties["browser"].ToString());
+            //extent.AddSystemInfo("Environment", TestContext.Properties["environment"].ToString());
+            //extent.AddSystemInfo("Browser", TestContext.Properties["browser"].ToString());
             test = ExtentReportsHelper.LogTest("Pre-condition");
 
-            
+            //Create new web driver
+            DriverUtils.CreateDriver(new DriverProperties(Config.ConfigFilePath,
+                Config.Driver));
+
+            DriverUtils.Maximize();
+        }
+
+        protected void NavigateToUrl(string url)
+        {
+            DriverUtils.GoToUrl(url);
+        }
+
+
+        protected void SetUIEnvVariables(TestContext testContext)
+        {
+            Config.ConfigFilePath = FileUtils.GetParentPath() + testContext.Properties["ConfigPath"];
+            Config.Driver = (string)testContext.Properties["Driver"];
+            Config.Env = (string)testContext.Properties["Env"];
+            Config.LogPath = captureLocation;
         }
 
         protected void ReportResult(Status status, string reportFilePath)
@@ -82,12 +96,12 @@ namespace Sample.UI.Tests
             else
             {
                 string timeStamp = DateTime.Now.ToString("ddMMyyyyHHmmss");
-                string filePath = captureLocation + "ErrorCapture" + timeStamp + ".png";
+                string filePath = Config.LogPath + @"\ErrorCapture" + timeStamp + ".png";
                 try
                 {
-                    if (Browser.Driver != null)
+                    if (DriverUtils.GetDriver() != null)
                     {
-                        Screenshot screenshot = ((ITakesScreenshot)Browser.Driver).GetScreenshot();
+                        Screenshot screenshot = ((ITakesScreenshot)DriverUtils.GetDriver()).GetScreenshot();
                         screenshot.SaveAsFile(filePath, ScreenshotImageFormat.Png);
                         ExtentReportsHelper.GetLastNode().Info("Last screenshot", ExtentReportsHelper.AttachScreenshot(filePath));
                     }
@@ -106,13 +120,13 @@ namespace Sample.UI.Tests
             if (TestContext.CurrentTestOutcome == UnitTestOutcome.Passed)
             {
                 ReportResult(Status.Pass, reportPath);
-                Browser.Quit();
+                DriverUtils.CloseCurrent();
                 return;
             }
             else if (TestContext.CurrentTestOutcome == UnitTestOutcome.Failed)
             {
                 ReportResult(Status.Fail, reportPath);
-                Browser.Quit();
+                DriverUtils.CloseCurrent();
                 return;
             }
         }
@@ -136,7 +150,7 @@ namespace Sample.UI.Tests
         }
     }
 
-    public class CustomTestMethodAttribute : DataTestMethodAttribute
+    public class SampleTestMethodAttribute : DataTestMethodAttribute
     {
         public override TestResult[] Execute(ITestMethod testMethod)
         {
@@ -153,7 +167,7 @@ namespace Sample.UI.Tests
                     try
                     {
                         var exception = item.TestFailureException.InnerException;
-                        TestBase.LogException(exception, testMethod.TestMethodName);
+                        Test.LogException(exception, testMethod.TestMethodName);
 
                     }
                     catch (Exception)
@@ -165,9 +179,9 @@ namespace Sample.UI.Tests
                     break;
                 }
 
-                for (int i = 0; i < TestBase.validations.Count; i++)
+                for (int i = 0; i < Test.validations.Count; i++)
                 {
-                    test.Info(string.Join(Environment.NewLine, TestBase.validations[i]));
+                    test.Info(string.Join(Environment.NewLine, Test.validations[i]));
                 }
                 if (success)
                 {
@@ -185,7 +199,7 @@ namespace Sample.UI.Tests
                 catch (Exception e)
                 {
                     Console.WriteLine(e.StackTrace + " " + e.Message);
-                    Console.WriteLine("Error to generate extent report at " + TestBase.reportPath);
+                    Console.WriteLine("Error to generate extent report at " + Test.reportPath);
                 }
             }
             catch (Exception)

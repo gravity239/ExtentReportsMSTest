@@ -35,29 +35,29 @@ namespace Sample.UI.Pages.Global
             return this;
         }
        
-        public LoggedInLanding LogValidation(ref List<KeyValuePair<string, bool>> validations, List<KeyValuePair<string, bool>> addedValidations)
-        {
-           validations.AddRange(addedValidations);
-            return this;
-        }
+        //public LoggedInLanding LogValidation(ref List<KeyValuePair<string, bool>> validations, List<KeyValuePair<string, bool>> addedValidations)
+        //{
+        //   validations.AddRange(addedValidations);
+        //    return this;
+        //}
 
-        public T LogValidation<T>(ref List<KeyValuePair<string, bool>> validations, List<KeyValuePair<string, bool>> addedValidations)
-        {
-            LogValidation(ref validations, addedValidations);
-            return (T)Activator.CreateInstance(typeof(T), WebDriver);
-        }
+        //public T LogValidation<T>(ref List<KeyValuePair<string, bool>> validations, List<KeyValuePair<string, bool>> addedValidations)
+        //{
+        //    LogValidation(ref validations, addedValidations);
+        //    return (T)Activator.CreateInstance(typeof(T), WebDriver);
+        //}
 
-        public LoggedInLanding LogValidation(ref List<KeyValuePair<string, bool>> validations, KeyValuePair<string, bool> addedValidation)
-        {
-            validations.Add(addedValidation);
-            return this;
-        }
+        //public LoggedInLanding LogValidation(ref List<KeyValuePair<string, bool>> validations, KeyValuePair<string, bool> addedValidation)
+        //{
+        //    validations.Add(addedValidation);
+        //    return this;
+        //}
 
-        public T LogValidation<T>(ref List<KeyValuePair<string, bool>> validations, KeyValuePair<string, bool> addedValidation)
-        {
-            validations.Add(addedValidation);
-            return (T)Activator.CreateInstance(typeof(T), WebDriver);
-        }
+        //public T LogValidation<T>(ref List<KeyValuePair<string, bool>> validations, KeyValuePair<string, bool> addedValidation)
+        //{
+        //    validations.Add(addedValidation);
+        //    return (T)Activator.CreateInstance(typeof(T), WebDriver);
+        //}
 
         #endregion
     }

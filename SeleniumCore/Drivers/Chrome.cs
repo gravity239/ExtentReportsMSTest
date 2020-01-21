@@ -12,13 +12,15 @@ namespace SeleniumCore.Drivers
 {
     public class Chrome : DriverManager
     {
-        public override void CreateDriver(string key)
+        public override void CreateDriver(string key, string downloadLocation = null)
         {
             var props = GetDriverProperties(key);
             ChromeOptions options = new ChromeOptions();
             options.AddArguments(props.GetArguments());
             foreach (var item in props.GetUserProfilePreference())
                 options.AddUserProfilePreference(item.Key, item.Value);
+            if(downloadLocation != null)
+                options.AddUserProfilePreference("download.default_directory", downloadLocation);
             IWebDriver _webDriver;
             if (!props.IsRemoteMode())
                 _webDriver = new ChromeDriver(options);
