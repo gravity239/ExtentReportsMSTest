@@ -9,18 +9,20 @@ namespace Sample.Common.ExcelInterop
 {
     public static class ExcelDriver
     {
-        public static ExcelHelper getExcelHelper(string filePath)
+        public static ExcelHelper GetExcelHelper(string filePath)
         {
-            string fileType = getFileType(filePath);
+            string fileType = GetFileType(filePath);
+
             if (fileType == ".xlsx")
-                return new New_ExcelHelper();
-            return new Old_ExcelHelper(fileType);
+                return new New_ExcelHelper(filePath);
+            return new Old_ExcelHelper(fileType, filePath);
         }
 
-        private static string getFileType(string filePath)
+        private static string GetFileType(string filePath)
         {
             FileInfo fileInfo = new FileInfo(filePath);
             return fileInfo.Extension.ToLower();
         }
     }
+
 }

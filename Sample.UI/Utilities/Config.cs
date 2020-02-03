@@ -16,7 +16,7 @@ namespace Sample.UI.Utilities
         public static string Driver; // can be chrome,ie,firefox
 
         [ThreadStatic]
-        public static string Env; // can be Desk or Mobile
+        public static string Mode; // can be Desk or Mobile
 
         [ThreadStatic]
         public static string LogPath;

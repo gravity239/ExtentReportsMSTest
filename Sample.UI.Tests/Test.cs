@@ -18,6 +18,7 @@ namespace Sample.UI.Tests
         public TestContext TestContext { get; set; }
         protected string browser = string.Empty;
         protected string environment = string.Empty;
+        protected string mode = string.Empty;
         private string excelUserSourcePath = string.Empty;
         private string localTempExcelUserTargetPath = string.Empty;
         protected string captureLocation = "";
@@ -42,19 +43,16 @@ namespace Sample.UI.Tests
         [TestInitialize]
         public void TestInitialize()
         {
-            if (TestContext.Properties.Contains("browser"))
-            {
-                browser = TestContext.Properties["browser"].ToString();
-            }
 
-            if (TestContext.Properties.Contains("environment"))
+            if (TestContext.Properties.Contains("Environment"))
             {
-                environment = TestContext.Properties["environment"].ToString();
+                environment = TestContext.Properties["Environment"].ToString();
             }
 
             downloadLocation = TestContext.TestDir;
             captureLocation = TestContext.TestDir;
             SetUIEnvVariables(TestContext);
+            EnvironmentDataAccess.GetTestEnvironment(TestContext.TestName, environment);
 
             validations = new List<KeyValuePair<string, bool>>();
             string report = Utils.GetRandomValue(TestContext.TestName);
@@ -81,7 +79,7 @@ namespace Sample.UI.Tests
         {
             Config.ConfigFilePath = FileUtils.GetParentPath() + testContext.Properties["ConfigPath"];
             Config.Driver = (string)testContext.Properties["Driver"];
-            Config.Env = (string)testContext.Properties["Env"];
+            Config.Mode = (string)testContext.Properties["Mode"];
             Config.LogPath = captureLocation;
         }
 

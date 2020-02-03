@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TestEnvironment>
+  <dev>
+    <Environment>dev</Environment>
+    <Email></Email>
+    <Password></Password>
+    <BaseURL></BaseURL>
+    <UIURL></UIURL>
+    <ClientId></ClientId>
+    <SecretId></SecretId>
+    <Audience></Audience>
+    <TenantId></TenantId>
+    <FunctionKey></FunctionKey>
+    <SubscriptionId></SubscriptionId>
+    <ResourceGroupName></ResourceGroupName>
+    <MergeEDWDBConnectionString>Server=MergeEDWDBDev;Database=MergeEDW;Trusted_Connection=Yes</MergeEDWDBConnectionString>
+  </dev>
+  <tst2>
+    <Environment>tst2</Environment>
+    <Email></Email>
+    <Password></Password>
+    <BaseURL></BaseURL>
+    <UIURL></UIURL>
+    <ClientId></ClientId>
+    <SecretId></SecretId>
+    <Audience></Audience>
+    <TenantId></TenantId>
+    <FunctionKey></FunctionKey>
+    <SubscriptionId></SubscriptionId>
+    <ResourceGroupName></ResourceGroupName>
+    <MergeEDWDBConnectionString>Server=MergeEDWDBTs1;Database=MergeEDW;Trusted_Connection=Yes</MergeEDWDBConnectionString>
+  </tst2>
+</TestEnvironment>

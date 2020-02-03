@@ -14,6 +14,7 @@ namespace Sample.UI.Tests.User
     {
         Home google = PageFactory.Get<Home>();
 
+        [TestCategory("HappyPath")]
         [SampleTestMethod]
         public void TC003()
         {

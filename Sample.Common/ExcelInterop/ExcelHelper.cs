@@ -8,7 +8,7 @@ namespace Sample.Common.ExcelInterop
 {
     public interface ExcelHelper
     {
-        void Open(string filePath, string sheetName);
+        void Open(string sheetName);
         string GetAllValue();
         int GetExcelTotalRows();
         string GetAllExcelRowsValue(int rowIndex);
@@ -17,5 +17,6 @@ namespace Sample.Common.ExcelInterop
         string GetCellValue(int intRow, int intColumn);
         int[] Search(string strKeyword, Boolean blnCaseSensitive = true);
         void Close();
+
     }
 }

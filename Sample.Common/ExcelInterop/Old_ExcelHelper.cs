@@ -19,21 +19,24 @@ namespace Sample.Common.ExcelInterop
          */
         public string fileType;
         private Application excel;
-        private System.Data.DataTable table;
+        public System.Data.DataTable table;
+        public string excelFilePath;
 
         public Old_ExcelHelper() { }
 
-        public Old_ExcelHelper(string fileType)
+        public Old_ExcelHelper(string fileType, string filePath)
         {
             this.fileType = fileType;
-        }
-
-        public void Open(string filePath, string sheetName)
-        {
             if (fileType == ".csv")
                 table = ConvertCSVtoDataTable(filePath);
-            else
-                using (var stream = File.Open(filePath, FileMode.Open, FileAccess.Read))
+            excelFilePath = filePath;
+        }
+
+        public void Open(string sheetName)
+        {
+            if (fileType != ".csv")
+            {
+                using (var stream = File.Open(excelFilePath, FileMode.Open, FileAccess.Read))
                 {
                     using (var reader = ExcelReaderFactory.CreateReader(stream))
                     {
@@ -44,6 +47,8 @@ namespace Sample.Common.ExcelInterop
                             table = result.Tables[sheetName.Trim()];
                     }
                 }
+            }
+
         }
 
         public string GetAllValue()
@@ -53,7 +58,7 @@ namespace Sample.Common.ExcelInterop
 
             int rowCount = table.Rows.Count;
             int colCount = table.Columns.Count;
-           
+
             for (int i = 0; i < rowCount; i++)
                 for (int j = 0; j < colCount; j++)
                     strCellValue += table.Rows[i][j].ToString() + ",";
@@ -69,13 +74,13 @@ namespace Sample.Common.ExcelInterop
 
             int rowCount = table.Rows.Count;
             int colCount = table.Columns.Count;
-    
+
             if (rowIndex > rowCount)
                 return strCellValue;
             else
             {
                 for (int colIndex = 0; colIndex < colCount; colIndex++)
-                    strCellValue += table.Rows[rowIndex][colIndex].ToString() + " ";
+                    strCellValue += table.Rows[rowIndex][colIndex].ToString() + ",";
 
                 strCellValue = strCellValue.Remove(strCellValue.Length - 1);
 
@@ -104,7 +109,7 @@ namespace Sample.Common.ExcelInterop
             {
                 excel.Visible = true;
                 workSheet.Activate();
-                
+
                 Thread.Sleep(timeout * 1000);
                 excel.Visible = false;
                 // workBook.Close();

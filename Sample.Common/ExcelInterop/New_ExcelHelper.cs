@@ -17,28 +17,25 @@ namespace Sample.Common.ExcelInterop
         This class support for working with Excel 2007 and newer (.XLSX)
         */
 
-        private ExcelWorksheet workSheet;
-        private Application excel = new Application();
+        public ExcelWorksheet workSheet;
+        public ExcelPackage package;
+        //private Application excel = new Application();
 
-        public New_ExcelHelper() { }
+        public New_ExcelHelper(string filePath) { package = new ExcelPackage(new FileInfo(filePath)); }
 
-        public void Open(string filePath, string sheetName)
+        public void Open(string sheetName)
         {
             try
             {
-
-                ExcelPackage package = new ExcelPackage(new FileInfo(filePath));
-
                 if (sheetName.Trim() == "")
                     workSheet = package.Workbook.Worksheets[1];
                 else
                     workSheet = package.Workbook.Worksheets[sheetName];
-                
             }
             catch (Exception)
             {
-                excel.Application.Quit();
-                excel.Quit();
+                //excel.Application.Quit();
+                //excel.Quit();
             }
         }
 
@@ -85,14 +82,11 @@ namespace Sample.Common.ExcelInterop
                     {
                         try
                         {
-                            string value = workSheet.Cells[rowIndex, colIndex].Value.ToString();
-                            if (value == "")
-                                value = value + " ";
-                            strCellValue += value + " ";
+                            strCellValue += workSheet.Cells[rowIndex, colIndex].Value.ToString() + ",";
                         }
                         catch (NullReferenceException)
                         {
-                            strCellValue += " ";
+                            strCellValue += "" + ",";
                         }
 
                     }
@@ -104,77 +98,77 @@ namespace Sample.Common.ExcelInterop
 
             catch (Exception)
             {
-                excel.Application.Quit();
-                excel.Quit();
+                //excel.Application.Quit();
+                //excel.Quit();
                 return strCellValue;
             }
         }
 
         public void WriteDataToExcelFile(string filePath, string sheetName, int rowIndex, int colIndex, string cellValue)
         {
-            var workBooks = excel.Workbooks;
-            Workbook workBook = workBooks.Open(filePath, ReadOnly: false, Editable: true);
-            Worksheet workSheet;
-            if (sheetName.Trim() == "")
-                workSheet = workBook.Worksheets[1];
-            else
-                workSheet = workBook.Sheets[sheetName];
-            try
-            {
-                if (workSheet == null)
-                    return;
+            //var workBooks = excel.Workbooks;
+            //Workbook workBook = workBooks.Open(filePath, ReadOnly: false, Editable: true);
+            //Worksheet workSheet;
+            //if (sheetName.Trim() == "")
+            //    workSheet = workBook.Worksheets[1];
+            //else
+            //    workSheet = workBook.Sheets[sheetName];
+            //try
+            //{
+            //    if (workSheet == null)
+            //        return;
 
-                Range cell = workSheet.Rows.Cells[rowIndex, colIndex];
-                cell.Value = cellValue;
+            //    Range cell = workSheet.Rows.Cells[rowIndex, colIndex];
+            //    cell.Value = cellValue;
 
-                excel.Application.ActiveWorkbook.Save();
-            }
-            catch (Exception)
-            {
-                excel.Application.Quit();
-                excel.Quit();
-            }
-            finally
-            {
-                if (workSheet != null) Marshal.ReleaseComObject(workSheet);
-                if (workBook != null) Marshal.ReleaseComObject(workBook);
-                if (workBooks != null) Marshal.ReleaseComObject(workBooks);
-            }
+            //    excel.Application.ActiveWorkbook.Save();
+            //}
+            //catch (Exception)
+            //{
+            //    excel.Application.Quit();
+            //    excel.Quit();
+            //}
+            //finally
+            //{
+            //    if (workSheet != null) Marshal.ReleaseComObject(workSheet);
+            //    if (workBook != null) Marshal.ReleaseComObject(workBook);
+            //    if (workBooks != null) Marshal.ReleaseComObject(workBooks);
+            //}
 
         }
 
         public void OpenExcelfileToView(string filePath, string sheetName, int timeout)
         {
-            var workBooks = excel.Workbooks;
-            Workbook workBook = workBooks.Open(filePath);
-            Worksheet workSheet;
-            if (sheetName.Trim() == "")
-                workSheet = workBook.Worksheets[1];
-            else
-                workSheet = workBook.Sheets[sheetName];
+            //var workBooks = excel.Workbooks;
+            //Workbook workBook = workBooks.Open(filePath);
+            //Worksheet workSheet;
+            //if (sheetName.Trim() == "")
+            //    workSheet = workBook.Worksheets[1];
+            //else
+            //    workSheet = workBook.Sheets[sheetName];
 
-            try
-            {
-                workSheet.Activate();
-                excel.Visible = true;
-                Thread.Sleep(timeout * 1000);
-                excel.Visible = false;
-                //excel.Application.Quit();
-                //excel.Quit();
-            }
-            catch (Exception)
-            {
-                excel.Application.Quit();
-                excel.Quit();
-            }
-            finally
-            {
-                if (workSheet != null) Marshal.ReleaseComObject(workSheet);
-                if (workBook != null) Marshal.ReleaseComObject(workBook);
-                if (workBooks != null) Marshal.ReleaseComObject(workBooks);
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-            }
+            //try
+            //{
+            //    workSheet.Activate();
+            //    excel.Visible = true;
+            //    Thread.Sleep(timeout * 1000);
+            //    excel.Visible = false;
+            //    //excel.Application.Quit();
+            //    //excel.Quit();
+            //}
+            //catch (Exception)
+            //{
+            //    excel.Application.Quit();
+            //    excel.Quit();
+            //}
+            //finally
+            //{
+            //    if (workSheet != null) Marshal.ReleaseComObject(workSheet);
+            //    if (workBook != null) Marshal.ReleaseComObject(workBook);
+            //    if (workBooks != null) Marshal.ReleaseComObject(workBooks);
+            //    GC.Collect();
+            //    GC.WaitForPendingFinalizers();
+            //}
         }
 
         public int GetExcelTotalRows()
@@ -186,8 +180,23 @@ namespace Sample.Common.ExcelInterop
             }
             catch (Exception)
             {
-                excel.Application.Quit();
-                excel.Quit();
+                //excel.Application.Quit();
+                //excel.Quit();
+                return 0;
+            }
+        }
+
+        public int GetExcelTotalColumns()
+        {
+            try
+            {
+                ExcelAddressBase oRange = workSheet.Dimension;
+                return oRange.End.Column;
+            }
+            catch (Exception)
+            {
+                //excel.Application.Quit();
+                //excel.Quit();
                 return 0;
             }
         }
@@ -200,9 +209,23 @@ namespace Sample.Common.ExcelInterop
             }
             catch (Exception)
             {
-                excel.Application.Quit();
-                excel.Quit();
+                //excel.Application.Quit();
+                //excel.Quit();
                 return null;
+            }
+        }
+
+        public bool IsCellAutoFiltered(int intColumn)
+        {
+            try
+            {
+                return workSheet.Cells[1, intColumn].AutoFilter;
+            }
+            catch (Exception)
+            {
+                //excel.Application.Quit();
+                //excel.Quit();
+                return false;
             }
         }
 
@@ -229,26 +252,27 @@ namespace Sample.Common.ExcelInterop
                 return new int[2] { -1, -1 };
             }
             catch (Exception)
-            { 
-                excel.Application.Quit();
-                excel.Quit();
+            {
+
+                //excel.Application.Quit();
+                //excel.Quit();
                 return new int[2] { -1, -1 };
             }
-            
+
         }
 
         public void Close()
         {
-            excel.Application.Quit();
-            excel.Quit();
-            Process[] excelProcs = Process.GetProcessesByName("EXCEL");
-            foreach (Process proc in excelProcs)
-            {
-                proc.Kill();
-            }
-            if (excel != null) Marshal.ReleaseComObject(excel);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            //excel.Application.Quit();
+            //excel.Quit();
+            //Process[] excelProcs = Process.GetProcessesByName("EXCEL");
+            //foreach (Process proc in excelProcs)
+            //{
+            //    proc.Kill();
+            //}
+            //if (excel != null) Marshal.ReleaseComObject(excel);
+            //GC.Collect();
+            //GC.WaitForPendingFinalizers();
         }
     }
 }

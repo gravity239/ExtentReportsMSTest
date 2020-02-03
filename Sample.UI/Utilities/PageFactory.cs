@@ -12,10 +12,10 @@ namespace Sample.UI.Utilities
         {
             var type = typeof(T);
             string fullName = null;
-            if (Config.Env == null || Config.Env == "Desk")
+            if (Config.Mode == null || Config.Mode == "Desk")
                  fullName = type.FullName;
             else
-                fullName = type.FullName + Config.Env;
+                fullName = type.FullName + Config.Mode;
             type = Type.GetType(fullName);
             return (T)Activator.CreateInstance(type);
         }
