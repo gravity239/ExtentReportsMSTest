@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
+using Sample.UI.Utilities;
+using SeleniumCore.DriverManagement;
 using SeleniumCore.Utilities;
 using System;
 using System.Collections.Generic;
@@ -37,8 +39,13 @@ namespace SeleniumCore.Helpers
         /// <param name="key"></param>
         /// <param name="pageName"></param>
         /// <returns></returns>
-        public string Get(JObject selectors, string locatorName, string pageName = null, string key = "default")
+        public string Get(JObject selectors, string locatorName, string pageName = null)
         {
+            string key;
+            if (Config.Driver.ToLower().Contains(DriverType.IE.ToString().ToLower()))
+                key = "default";
+            else
+                key = Config.Driver.ToLower().Split('-')[1];
             if (!string.IsNullOrEmpty(pageName))
             {
                 return (string)selectors[pageName][key][locatorName];

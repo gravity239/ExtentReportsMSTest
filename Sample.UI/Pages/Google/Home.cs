@@ -15,11 +15,15 @@ namespace Sample.UI.Pages.Google
 {
     public class Home : Page
     {
+        protected string _searchTextBox;
         public Home()
         {
             selector = Locator.Instance.Load(locatorPath);
+            _searchTextBox = Locator.Instance.Get(selector, "searchTextBox");
         }
-        public Element SearchTextbox => new Element("name=q");
+
+        //public Element SearchTextbox => new Element("name=q");
+        public Element SearchTextbox => new Element(_searchTextBox);
         public Element SearchForm => new Element(Locator.Instance.Get(selector, "searchForm"));
 
 
@@ -28,7 +32,7 @@ namespace Sample.UI.Pages.Google
         {
             GetLastNode().Info("Search for: " + text);
             SearchTextbox.SendKeys(text);
-           
+
             //Child node handle illustration for multiple threads
             var currentLastNode = GetLastNode();
             List<string> list = new List<string> { "1", "2", "3", "4", "5", "6" };

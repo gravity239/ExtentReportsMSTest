@@ -37,8 +37,6 @@ namespace Sample.UI.Tests
         public static ExtentTest test;
 
         public ExtentReports extent;
-      
-
 
         [TestInitialize]
         public void TestInitialize()

@@ -27,7 +27,7 @@ namespace Sample.UI.Pages
         {
             GetLastNode().Info("Search for: " + text);
             SearchTextbox.InputText(text);
-           
+
             //Child node handle illustration for multiple threads
             var currentLastNode = GetLastNode();
             List<string> list = new List<string> { "1", "2", "3", "4", "5", "6" };

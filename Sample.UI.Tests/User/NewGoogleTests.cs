@@ -12,8 +12,7 @@ namespace Sample.UI.Tests.User
     [TestClass]
     public class NewGoogleTests : Test
     {
-        Home google = PageFactory.Get<Home>();
-
+       
         [TestCategory("HappyPath")]
         [SampleTestMethod]
         public void TC003()
@@ -26,6 +25,7 @@ namespace Sample.UI.Tests.User
             //When
             //2. Enter search text.
             test = LogTest("TC003 - Verify that search value is correct.");
+            Home google = PageFactory.Get<Home>();
             google.Search("abc");
 
             //Then
@@ -47,6 +47,7 @@ namespace Sample.UI.Tests.User
             //When
             //2. Enter search text.
             test = LogTest("TC004 - Verify that search value is correct.");
+            Home google = PageFactory.Get<Home>();
             google.Search("abc");
 
             //Then

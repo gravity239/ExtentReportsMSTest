@@ -40,7 +40,7 @@
     <Parameter name="Driver" value="local-ie" />
     <!--can be local-chrome,local-ie,local-firefox,android-chrome,ios-web,etc-->
     <Parameter name="Environment" value="dev" />
-    <Parameter name="Mode" value="Desk" />
+    <Parameter name="Mode" value="Mobile" />
     <Parameter name="ConfigPath" value="/Resources/DriverConfig.json" />
   </TestRunParameters>
   <!-- Adapter Specific sections -->
