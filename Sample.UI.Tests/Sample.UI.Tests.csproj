@@ -152,6 +152,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Resources\DataSource.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="TestBase.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
@@ -195,7 +196,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EnvironmentData\DT_CommonData.xml" />
+    <Content Include="Resources\DT_CommonData.xml" />
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>
   <Choose>

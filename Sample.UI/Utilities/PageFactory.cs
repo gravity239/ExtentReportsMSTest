@@ -12,10 +12,22 @@ namespace Sample.UI.Utilities
         {
             var type = typeof(T);
             string fullName = null;
-            if (Config.Mode == null || Config.Mode == "Desk")
+            if (Config.MachineType == null || Config.MachineType == "Desk")
                  fullName = type.FullName;
             else
-                fullName = type.FullName + Config.Mode;
+                fullName = type.FullName + Config.MachineType;
+            type = Type.GetType(fullName);
+            return (T)Activator.CreateInstance(type);
+        }
+
+        public static T Get<T>(string machineType)
+        {
+            var type = typeof(T);
+            string fullName = null;
+            if (machineType == null || machineType == "Desk")
+                fullName = type.FullName;
+            else
+                fullName = type.FullName + machineType;
             type = Type.GetType(fullName);
             return (T)Activator.CreateInstance(type);
         }

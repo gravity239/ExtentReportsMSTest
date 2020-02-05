@@ -14,7 +14,7 @@ namespace Sample.Common.Helper
         {
             if (sourceFilePath == null)
             {
-                sourceFilePath = Utils.GetProjectPath() + @"EnvironmentData\DT_CommonData.xml";
+                sourceFilePath = Utils.GetProjectPath() + @"Resources\DT_CommonData.xml";
             }
             //Thread.Sleep(1000);
             //string localTempTargetPath = string.Format(@"c:\\temp\\testresults\\DT_CommonData_{0}_{1}.xml", testName, new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds().ToString());

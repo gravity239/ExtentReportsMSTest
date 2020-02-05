@@ -38,6 +38,13 @@ namespace Sample.UI.Tests
 
         public ExtentReports extent;
 
+        [AssemblyInitialize]
+        public static void AssemblyInitialize(TestContext testContext)
+        {
+            Console.WriteLine("Assembly initialize: " + testContext.TestName);
+            SetUIEnvVariables(testContext);
+        }
+
         [TestInitialize]
         public void TestInitialize()
         {
@@ -49,12 +56,12 @@ namespace Sample.UI.Tests
 
             downloadLocation = TestContext.TestDir;
             captureLocation = TestContext.TestDir;
-            SetUIEnvVariables(TestContext);
+            //SetUIEnvVariables(TestContext);
             EnvironmentDataAccess.GetTestEnvironment(TestContext.TestName, environment);
 
             validations = new List<KeyValuePair<string, bool>>();
             string report = Utils.GetRandomValue(TestContext.TestName);
-            reportPath = captureLocation + report + ".html";
+            reportPath = captureLocation + "\\" + report + ".html";
             extent = ExtentReportsHelper.CreateReport(reportPath, TestContext.TestName);
             //extent.AddSystemInfo("Environment", TestContext.Properties["environment"].ToString());
             //extent.AddSystemInfo("Browser", TestContext.Properties["browser"].ToString());
@@ -73,12 +80,12 @@ namespace Sample.UI.Tests
         }
 
 
-        protected void SetUIEnvVariables(TestContext testContext)
+        protected static void SetUIEnvVariables(TestContext testContext)
         {
             Config.ConfigFilePath = FileUtils.GetParentPath() + testContext.Properties["ConfigPath"];
             Config.Driver = (string)testContext.Properties["Driver"];
-            Config.Mode = (string)testContext.Properties["Mode"];
-            Config.LogPath = captureLocation;
+            Config.MachineType = (string)testContext.Properties["Mode"];
+            Config.LogPath = testContext.TestDir;
         }
 
         protected void ReportResult(Status status, string reportFilePath)
@@ -91,7 +98,7 @@ namespace Sample.UI.Tests
 
             else
             {
-                string timeStamp = DateTime.Now.ToString("ddMMyyyyHHmmss");
+                string timeStamp = DateTime.Now.ToString("ddMMyyyyHHmmssfff");
                 string filePath = Config.LogPath + @"\ErrorCapture" + timeStamp + ".png";
                 try
                 {

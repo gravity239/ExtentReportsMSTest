@@ -9,16 +9,12 @@ namespace Sample.UI.Utilities
 {
     public static class Config
     {
-        [ThreadStatic]
         public static string ConfigFilePath;
 
-        [ThreadStatic]
         public static string Driver; // can be chrome,ie,firefox
 
-        [ThreadStatic]
-        public static string Mode; // can be Desk or Mobile
+        public static string MachineType; // can be Desk or Mobile
 
-        [ThreadStatic]
         public static string LogPath;
     }
 }
