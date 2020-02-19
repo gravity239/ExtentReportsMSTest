@@ -42,7 +42,8 @@ namespace SeleniumCore.Helpers
         public string Get(JObject selectors, string locatorName, string pageName = null)
         {
             string key;
-            if (Config.Driver.ToLower().Contains(DriverType.IE.ToString().ToLower()))
+            if (Config.Driver.ToLower().Contains(DriverType.IE.ToString().ToLower())
+               || Config.Driver.ToLower().Contains(DriverType.Chrome.ToString().ToLower()))
                 key = "default";
             else
                 key = Config.Driver.ToLower().Split('-')[1];

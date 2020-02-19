@@ -36,7 +36,7 @@ namespace Sample.UI.Tests.User
             validations.Should().OnlyContain(validations => validations.Value).Equals(bool.TrueString);
         }
 
-
+        [TestCategory("HappyPath")]
         [SampleTestMethod]
         public void TC004()
         {
@@ -58,7 +58,7 @@ namespace Sample.UI.Tests.User
             validations.Should().OnlyContain(validations => validations.Value).Equals(bool.TrueString);
         }
 
-
+        [TestCategory("HappyPath")]
         [SampleTestMethod]
         public void TC005()
         {

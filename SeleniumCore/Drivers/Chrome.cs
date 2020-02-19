@@ -17,9 +17,13 @@ namespace SeleniumCore.Drivers
             var props = GetDriverProperties(key);
             ChromeOptions options = new ChromeOptions();
             options.AddArguments(props.GetArguments());
-            foreach (var item in props.GetUserProfilePreference())
-                options.AddUserProfilePreference(item.Key, item.Value);
-            if(downloadLocation != null)
+            if (props.GetUserProfilePreference() != null)
+            {
+                foreach (var item in props.GetUserProfilePreference())
+                    options.AddUserProfilePreference(item.Key, item.Value);
+            }
+
+            if (downloadLocation != null)
                 options.AddUserProfilePreference("download.default_directory", downloadLocation);
             IWebDriver _webDriver;
             if (!props.IsRemoteMode())
@@ -29,7 +33,7 @@ namespace SeleniumCore.Drivers
                 foreach (var cap in props.GetCapabilities())
                     options.AddAdditionalCapability(cap.Key, cap.Value);
 
-                _webDriver = new RemoteWebDriver(new Uri(props.GetRemoteUrl()), options);
+                _webDriver = new RemoteWebDriver(new Uri(props.GetRemoteUrl()), options.ToCapabilities());
             }  
             SetWebDriver(key, _webDriver);
         }

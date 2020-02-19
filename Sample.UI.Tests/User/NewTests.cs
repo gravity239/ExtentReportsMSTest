@@ -17,6 +17,7 @@ namespace Sample.UI.Tests.User
     {
         Home google = PageFactory.Get<Home>();
 
+        [TestCategory("HappyPath")]
         [SampleTestMethod]
         public void TC006()
         {
@@ -38,6 +39,7 @@ namespace Sample.UI.Tests.User
             validations.Should().OnlyContain(validations => validations.Value).Equals(bool.TrueString);
         }
 
+        [TestCategory("HappyPath")]
         [SampleTestMethod]
         public void TC007()
         {

@@ -17,20 +17,29 @@
   "local-ie": {
     "driverType": "IE",
     "arguments": [ ],
-    "capabilities": {"disable-popup-blocking": "true" },
+    "capabilities": { "disable-popup-blocking": "true" },
     "runMode": "Local",
     "timeSpan": 120
+  },
+   "remote-ie": {
+    "driverType": "IE",
+    "arguments": [ ],
+    "capabilities": {"disable-popup-blocking": "true" },
+    "runMode": "Remote",
+    "timeSpan": 120,
+     "remoteUrl": "http://192.168.195.44:4444/wd/hub/"
   },
   "remote-chrome": {
     "driverType": "Chrome",
     "arguments": [ ],
     "capabilities": {
-      "browser": "Chrome",
-      "browser_version": "73.0",
-      "browserstack.user": "",
-      "browserstack.key": ""
+      //"browser": "Chrome"
+      //"version": "80.0"
+      //"browser_version": "73.0"
+      //"browserstack.user": "",
+      //"browserstack.key": ""
     },
-    "remoteUrl": "http://hub-cloud.browserstack.com/wd/hub/",
+    "remoteUrl": "http://192.168.195.40:5555/wd/hub/",
     "runMode": "Remote",
     "timeSpan": 120
   },
