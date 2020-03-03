@@ -50,7 +50,7 @@ namespace Sample.Common.Helper
                 if (extent == null)
                 {
                     extent = new ExtentReports();
-                    System.IO.File.Create(reportPath).Dispose();
+                    //System.IO.File.Create(reportPath).Dispose();
                 }
                 else
                 {

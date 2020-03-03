@@ -1,25 +1,29 @@
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static Sample.Common.Helper.ExtentReportsHelper;
 using Sample.UI.Pages.Google;
 using FluentAssertions;
 using Sample.UI.Utilities;
+using NUnit.Framework;
+using System.Threading;
 
 namespace Sample.UI.Tests.User
 {
     /// <summary>
     /// Summary description for NewTests
     /// </summary>
-    [TestClass]
-    public class NewTests : Test
+    [TestFixture]
+    [Parallelizable(ParallelScope.Children)]
+    public class NewTests : NunitTest
     {
-        Home google = PageFactory.Get<Home>();
+      
 
-        [SampleTestMethod]
+        [Test]
+        [Category("Nunit")]
         public void TC006()
         {
+
             //Given
             //1. Navigate to Google Home Page.
             test.Info("Navigate to Google page.");
@@ -28,7 +32,7 @@ namespace Sample.UI.Tests.User
             //When
             //2. Enter search text.
             test = LogTest("TC004 - Verify that search value is correct.");
-            //var google = PageFactory.Get<Home>();
+            Home google = PageFactory.Get<Home>();
             google.Search("abc");
 
             //Then
@@ -38,7 +42,8 @@ namespace Sample.UI.Tests.User
             validations.Should().OnlyContain(validations => validations.Value).Equals(bool.TrueString);
         }
 
-        [SampleTestMethod]
+        [Test]
+        [Category("Nunit")]
         public void TC007()
         {
             //Given
@@ -48,13 +53,14 @@ namespace Sample.UI.Tests.User
 
             //When
             //2. Enter search text.
-            test = LogTest("TC004 - Verify that search value is correct.");
-            //var google = PageFactory.Get<Home>();
+            Thread.Sleep(10000);
+            test = LogTest("TC007 - Verify that search value is correct.");
+            Home google = PageFactory.Get<Home>();
             google.Search("abc");
 
             //Then
             //VP: Verify that search text displays correctly 
-            validations.Add(google.ValidateSearchValue("abcd"));
+            validations.Add(google.ValidateSearchValue("abc"));
             Console.WriteLine(string.Join(System.Environment.NewLine, validations.ToArray()));
             validations.Should().OnlyContain(validations => validations.Value).Equals(bool.TrueString);
         }

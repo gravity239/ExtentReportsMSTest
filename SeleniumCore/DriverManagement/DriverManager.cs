@@ -23,7 +23,8 @@ namespace SeleniumCore.DriverManagement
         /// <param name="properties"></param>
         public void SetDriverProperties(string key, DriverProperties properties)
         {
-            _driverProperties.Add(key, properties);
+            if (!_driverProperties.Keys.Contains(key))
+                _driverProperties.Add(key, properties);
         }
 
         /// <summary>
@@ -51,7 +52,8 @@ namespace SeleniumCore.DriverManagement
         public void SetWebDriver(string key, IWebDriver driver)
         {
             SetElementTimeOut(key, _defaultElementTimeOut);
-            _webDrivers.Add(key, driver);
+            if (!_webDrivers.Keys.Contains(key))
+                _webDrivers.Add(key, driver);
         }
 
         /// <summary>
@@ -92,7 +94,8 @@ namespace SeleniumCore.DriverManagement
         /// <param name="seconds"></param>
         public void SetElementTimeOut(string key, int seconds)
         {
-            _elementTimeOut.Add(key, seconds);
+            if (!_elementTimeOut.Keys.Contains(key))
+                _elementTimeOut.Add(key, seconds);
         }
     }
 }

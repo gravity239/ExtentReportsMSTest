@@ -144,7 +144,8 @@ namespace SeleniumCore.DriverManagement
         /// </summary>
         public static void CloseCurrent()
         {
-            GetDriver().Quit();
+            //GetDriver().Quit();
+            _DRIVER.Value.CloseDrivers();
         }
 
         /// <summary>
