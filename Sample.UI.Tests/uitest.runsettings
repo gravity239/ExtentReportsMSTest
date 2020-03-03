@@ -37,10 +37,10 @@
   </DataCollectionRunSettings>-->
   <!-- Parameters used by tests at runtime -->
   <TestRunParameters>
-    <Parameter name="Driver" value="local-ie" />
+    <Parameter name="Driver" value="remote-chrome" />
     <!--can be local-chrome,local-ie,local-firefox,android-chrome,ios-web,etc-->
     <Parameter name="Environment" value="dev" />
-    <Parameter name="Mode" value="Mobile" />
+    <Parameter name="Mode" value="Desk" />
     <Parameter name="ConfigPath" value="/Resources/DriverConfig.json" />
   </TestRunParameters>
   <!-- Adapter Specific sections -->

@@ -32,7 +32,7 @@ namespace Sample.UI.Tests.User
             //When
             //2. Enter search text.
             test = LogTest("TC004 - Verify that search value is correct.");
-            Home google = PageFactory.Get<Home>();
+            Home google = new Home();
             google.Search("abc");
 
             //Then
@@ -55,7 +55,7 @@ namespace Sample.UI.Tests.User
             //2. Enter search text.
             Thread.Sleep(10000);
             test = LogTest("TC007 - Verify that search value is correct.");
-            Home google = PageFactory.Get<Home>();
+            Home google = new Home();
             google.Search("abc");
 
             //Then

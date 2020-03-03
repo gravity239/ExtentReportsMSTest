@@ -18,13 +18,13 @@ namespace Sample.UI.Pages.Google
         protected string _searchTextBox;
         public Home()
         {
-            selector = Locator.Instance.Load(locatorPath);
-            _searchTextBox = Locator.Instance.Get(selector, "searchTextBox");
+            //selector = Locator.Instance.Load(locatorPath);
+            //_searchTextBox = Locator.Instance.Get(selector, "searchTextBox");
         }
 
-        //public Element SearchTextbox => new Element("name=q");
-        public Element SearchTextbox => new Element(_searchTextBox);
-        public Element SearchForm => new Element(Locator.Instance.Get(selector, "searchForm"));
+        public Element SearchTextbox => new Element("name=q");
+        //public Element SearchTextbox => new Element(_searchTextBox);
+        //public Element SearchForm => new Element(Locator.Instance.Get(selector, "searchForm"));
 
 
         [Logging]
