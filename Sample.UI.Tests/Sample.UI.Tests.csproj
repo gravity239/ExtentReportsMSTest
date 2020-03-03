@@ -174,7 +174,9 @@
     <Compile Include="User\NewTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="FodyWeavers.xsd">
       <SubType>Designer</SubType>
     </None>
